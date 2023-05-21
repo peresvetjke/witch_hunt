@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Aliases</h1>
+
+<div id="aliases">
+  <% @aliases.each do |alias| %>
+    <%= render alias %>
+    <p>
+      <%= link_to "Show this alias", alias %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New alias", new_alias_path %>
