@@ -1,0 +1,27 @@
+<%= form_with(model: entity) do |form| %>
+  <% if entity.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(entity.errors.count, "error") %> prohibited this entity from being saved:</h2>
+
+      <ul>
+        <% entity.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title %>
+
+    <% Type.all.each do |type| %>
+      <%= check_box_tag "entity[type_ids][]", type.id, @entity.entities_types.pluck(:type_id).include?(type.id), {id: dom_id(type)} %>
+      <%= label_tag dom_id(type), type.title %>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
